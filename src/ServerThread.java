@@ -13,16 +13,17 @@ public class ServerThread extends Thread {
 	
 	public String word;
 	public Board b;
-
+	public Log log;
 	public boolean disconnected = false;
 	public int players;
 	public Vector<String> names = new Vector<String>();
 	public Vector<ServerThread> clients = new Vector<ServerThread>();
 	public Vector<ServerThread> remove = new Vector<ServerThread>();
-    public ServerThread(Socket socket,Board b) {
+    public ServerThread(Socket socket,Board b,Log log) {
 	super("ServerThread");
 	this.socket = socket;
 	this.b = b;
+	this.log = log;
     }
 
     public void run() {
@@ -98,7 +99,7 @@ public class ServerThread extends Thread {
 
 	} catch (IOException e) {
 	    disconnected = true;
-	    System.out.println("Player "+name+" disconnected");
+	    log.updateLog(21, "Player "+name+" disconnected", true);
 	   // e.printStackTrace();
 	}
     }

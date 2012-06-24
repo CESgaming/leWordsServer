@@ -11,9 +11,12 @@ public class GameManager  extends Thread {
 	public Vector<String> names = new Vector<String>();
 	public ServerThread lastClient=null;
 	public ServerThread deadClient=null;
+	public Log log;
 	public Random rnd = new Random();
-	public GameManager()
-	{}
+	public GameManager(Log log)
+	{
+		this.log = log;
+	}
 	
 
 	public void run()
