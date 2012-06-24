@@ -6,14 +6,19 @@ import java.io.*;
 public class ServerThread extends Thread {
 	private Socket socket = null;
 
-	public String word;
+	//Client information
+	public String name = "";
 	public int score;
+	public int ID;
+	
+	public String word;
 	public Board b;
 
 	public boolean disconnected = false;
-	public String name = "";
 	public int players;
 	public Vector<String> names = new Vector<String>();
+	public Vector<ServerThread> clients = new Vector<ServerThread>();
+	public Vector<ServerThread> remove = new Vector<ServerThread>();
     public ServerThread(Socket socket,Board b) {
 	super("ServerThread");
 	this.socket = socket;
@@ -64,12 +69,27 @@ public class ServerThread extends Thread {
 		    //System.out.println("listening");
 	    	//Get points of client
 		    score = inStream.readInt();
+		    
+		    //Delete disconnected players
+		    for(int i=0; i < remove.size(); i++)
+		    	clients.remove(remove.elementAt(i));
+		    remove.clear();
 	    	//Write names to player
+		    players = clients.size();
 		    outStream.writeInt(players);
+		    
 		    for(int i =0; i < players; i++)
 		    {
-		    	outStream.writeInt(names.elementAt(i).length());
-		    	outStream.writeChars(names.elementAt(i));
+		    	//Politely ask if the client already knows the person we are about to send him to
+		    	outStream.writeInt(clients.elementAt(i).ID);
+		    	outStream.writeInt(clients.elementAt(i).score);
+		    	if(!inStream.readBoolean())
+		    	{
+		    	//He doesnt know him, so send him all we know
+		    	outStream.writeInt(clients.elementAt(i).name.length());
+		    	outStream.writeChars(clients.elementAt(i).name);
+		    	}
+
 		    }
 	    }
 	    out.close();

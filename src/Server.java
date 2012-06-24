@@ -53,7 +53,7 @@ public class Server {
         	
         	last = new ServerThread(serverSocket.accept(), b);
         	last.start();
-        	gM.clients.add(last);
+        	gM.add(last);
         	
         }
         serverSocket.close();
