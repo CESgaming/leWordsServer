@@ -19,10 +19,13 @@ public class Server {
           d = new Dictionary();
     	  h.fillHypercube();
           d.fillCompleteDictionary();
+          do {
           b.fillBoard();
           b.filterLevelOne(d,h);
           b.filterLevelTwo();
           b.filterLevelThree();
+          }while(b.boardDictionary.length<50);
+          b.boardDictionary.printDictionary();
           GameManager gM = new GameManager();
           
     	
