@@ -39,12 +39,14 @@ public class Server {
 
 
 		ServerSocket serverSocket = null;
+		int port = 1234; // actually works
 		try {
-			serverSocket = new ServerSocket(5222);
-			log.updateLog(11,"Server has come online.",false);
+			
+			serverSocket = new ServerSocket(port);
+			log.updateLog(11,"Server has come online.",true);
 		} catch (IOException e) {
-			log.updateLog(30, "Could not listen on port: 5222.", false);
-			System.err.println("Could not listen on port: 5222.");
+			log.updateLog(30, "Could not listen on port: "+port, false);
+			System.err.println("Could not listen on port: "+port);
 			System.exit(1);
 		}
 		
