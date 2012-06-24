@@ -34,7 +34,8 @@ public class GameManager  extends Thread {
 	        		else
 	        		{
 	        		if(!names.contains(clients.elementAt(i).name))
-	        			{names.add(clients.elementAt(i).name);System.out.println(clients.elementAt(i).name);}
+	        			{names.add(clients.elementAt(i).name);
+	        			System.out.println("Player "+clients.elementAt(i).name+ " connected.");}
 	        		clients.elementAt(i).players = numberOfClients;
 	        		clients.elementAt(i).names = names;
 	        		}
