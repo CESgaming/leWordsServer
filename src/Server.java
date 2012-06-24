@@ -13,21 +13,25 @@ public class Server {
     	  Board b;
     	  Hypercube h;
     	  Dictionary d;
+    	  Filter f;
     	  ServerThread last = null;
           b = new Board(dim);
           h = new Hypercube();
           d = new Dictionary();
+          f = new Filter();
     	  h.fillHypercube();
           d.fillCompleteDictionary();
           do {
           b.fillBoard();
-          b.filterLevelOne(d,h);
-          b.filterLevelTwo();
-          b.filterLevelThree();
+          f.filterLevelOne(d,h,b);
+          f.filterLevelTwo(b);
+          f.filterLevelThree(b);
+
 
           }while(b.boardDictionary.length<50 );
+          
           System.out.println("Server running.");
-          //b.boardDictionary.printDictionary();
+          b.boardDictionary.printDictionary();
           GameManager gM = new GameManager();
           
     	
