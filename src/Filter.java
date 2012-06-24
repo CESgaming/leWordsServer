@@ -223,17 +223,15 @@ public class Filter{
 		Stack <String> stack = new Stack <String>();
 		for (String word : b.boardDictionary.dictionary)
 		{
-
-
-			//System.out.println(word);
+	
 			letters = word.toCharArray();
 			m = letters.length;
 
-			boolean found =  recursiveSearchDepthN(b,field,b.dim,letters,0,m-1,0,0);
+			boolean found =  recursiveSearchDepthN(false,b,field,b.dim,letters,0,m-1,0,0);
 			if (found){
 				count ++;
 				stack.push(word);
-				//System.out.println("FOUND");
+			//	System.out.println("FOUND");
 
 
 			}
@@ -247,19 +245,21 @@ public class Filter{
 		b.boardDictionary = new Dictionary(count,subDict);
 	}
 
-	public boolean recursiveSearchDepthN(Board b,int[][] field, int n,char[] word,int L, int Lmax,int posi,int posj){
-		boolean ret= false;
-		//System.out.println("rSd");
+	public boolean recursiveSearchDepthN(boolean ret,Board b,int[][] field, int n,char[] word,int L, int Lmax,int posi,int posj){
+		//boolean ret= false;
+		
+		//System.out.println("at start : word[L] = "+ word[L]);
 		if (L==0) { //Level 0
 			//System.out.println("L==0");
 			for (int i = 1;i<n+1;i++){
 				for(int j = 1; j<n+1;j++){
-					//System.out.println(letters[i-1][j-1]+" "+ word[L]);
+					//System.out.println(b.letters[i-1][j-1]+" "+ word[L]);
 					if (b.letters[i-1][j-1] == word[L]){
 						if (field[i][j] !=-1 ){ // else boundary
 							if (field[i][j] !=1){// else already taken
 								field[i][j] = 1;
-								ret = recursiveSearchDepthN(b,field,n,word,L+1,Lmax,i,j);
+								ret = recursiveSearchDepthN(ret,b,field,n,word,L+1,Lmax,i,j);
+							//	if (ret) return ret; // dont keep searching 
 								field[i][j] = 0;
 							}
 						}
@@ -271,12 +271,15 @@ public class Filter{
 			//System.out.println("L=="+L);
 			for(int i=posi-1;i<posi+2;i++){
 				for (int j=posj-1;j<posj+2;j++){
+					
 					if (field[i][j] !=-1 ){ // else boundary
 						if (field[i][j] !=1){// else already taken
+							//System.out.println(b.letters[i-1][j-1]+" "+ word[L]);
 
 							if (b.letters[i-1][j-1] == word[L]){
 								field[i][j] = 1;
-								ret = recursiveSearchDepthN(b,field,n,word,L+1,Lmax,i,j);
+								ret = recursiveSearchDepthN(ret,b,field,n,word,L+1,Lmax,i,j);
+							//	if (ret) return ret; // dont keep searching
 								field[i][j] = 0;
 							}
 						}
@@ -291,8 +294,10 @@ public class Filter{
 
 					if (field[i][j] != -1){
 						if (field[i][j] != 1){
+							//System.out.println(b.letters[i-1][j-1]+" "+ word[L]);
 							if (b.letters[i-1][j-1] ==word[L]){
 								ret = true;
+							//	return ret;
 							}
 						}
 					}
