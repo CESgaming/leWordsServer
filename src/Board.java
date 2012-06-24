@@ -8,7 +8,6 @@ public class Board{
 	public int [][] points;
 	public Dictionary boardDictionary;
 	public boolean initialized= false;
-	int boardScore;
 
 
 
@@ -16,13 +15,6 @@ public class Board{
 		dim = d;
 		letters = new char[d][d];
 		points  = new int[d][d];
-	}
-	public void calcBoardScore(){
-		boardScore = 0;
-		for (int i=0;i<boardDictionary.length;i++){
-			boardScore+=calcWordPoints(boardDictionary.dictionary[i]);
-		}
-
 	}
 
 	public void filterLevelOne(Dictionary full,Hypercube h){
@@ -119,7 +111,6 @@ public class Board{
 			}
 
 			boardDictionary = new Dictionary(N,S);
-			calcBoardScore();
 		}
 
 	}
@@ -184,7 +175,7 @@ public class Board{
 		while(!Sigma.empty()){
 			c = Sigma.peek();
 
-			System.out.println(c);
+
 			Sigma.pop();
 			// this is a bed letter
 			for (int i=0;i<boardDictionary.length;i++){
@@ -235,7 +226,6 @@ public class Board{
 			}
 		}
 		boardDictionary = new Dictionary(pos,newDictionary);
-		calcBoardScore();
 
 	}
 
@@ -275,9 +265,10 @@ public class Board{
 			if (found){
 				count ++;
 				stack.push(word);
+				//System.out.println("FOUND");
+
+
 			}
-
-
 		}
 		String[] subDict = new String[count];
 		for ( int i=0;i<count;i++){
@@ -286,14 +277,16 @@ public class Board{
 		}
 
 		boardDictionary = new Dictionary(count,subDict);
-		calcBoardScore();
 	}
 
 	public boolean recursiveSearchDepthN(int[][] field, int n,char[] word,int L, int Lmax,int posi,int posj){
 		boolean ret= false;
+		//System.out.println("rSd");
 		if (L==0) { //Level 0
-			for (int i = 1;i<n-1;i++){
-				for(int j = 1; j<n-1;j++){
+			//System.out.println("L==0");
+			for (int i = 1;i<n+1;i++){
+				for(int j = 1; j<n+1;j++){
+					//System.out.println(letters[i-1][j-1]+" "+ word[L]);
 					if (letters[i-1][j-1] == word[L]){
 						if (field[i][j] !=-1 ){ // else boundary
 							if (field[i][j] !=1){// else already taken
@@ -307,6 +300,7 @@ public class Board{
 				}
 			}
 		}else if (L<Lmax){
+			//System.out.println("L=="+L);
 			for(int i=posi-1;i<posi+2;i++){
 				for (int j=posj-1;j<posj+2;j++){
 					if (field[i][j] !=-1 ){ // else boundary
@@ -323,6 +317,7 @@ public class Board{
 				}
 			}
 		}else{ // L == Lmax
+			//System.out.println("L==Lmax");
 			for(int i=posi-1;i<posi+2;i++){
 				for (int j=posj-1;j<posj+2;j++){
 
@@ -371,11 +366,11 @@ public class Board{
          c='n';}
         // to here
 				 */
-
+				c = 'a';
 				letters[i][j] = c;
 				points[i][j] = pointsOf(c);  
 			}
-		}/*
+		}
 		letters[0][0] = 'a';
 		letters[0][1] = 'a';
 		letters[0][2] = 'c';
@@ -401,7 +396,8 @@ public class Board{
 		letters[4][3] = 'd';
 		letters[4][2] = 'e';
 		letters[4][1] = 'r';
-		*/
+
+
 		initialized = true;
 
 	}
