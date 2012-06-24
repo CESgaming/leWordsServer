@@ -25,7 +25,7 @@ public class Server {
           b.filterLevelTwo();
           b.filterLevelThree();
           b.printBoard();
-          }while(b.boardDictionary.length<50 &&false);
+          }while(b.boardDictionary.length<50 );
           //b.boardDictionary.printDictionary();
           GameManager gM = new GameManager();
           
