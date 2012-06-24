@@ -39,7 +39,7 @@ public class Server {
 
 
 		ServerSocket serverSocket = null;
-		int port = 1234; // actually works
+		int port = 5222; // actually works
 		try {
 			
 			serverSocket = new ServerSocket(port);
