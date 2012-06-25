@@ -31,15 +31,23 @@ public class GameManager  extends Thread {
 		f = new Filter();
 		h.fillHypercube();
 		d.fillCompleteDictionary();
+	
+		Markov m = new Markov();
+		m.createProbabilityTable();
+	
+
 		
+		int k= 0;
 		do
-		{
-			b.fillBoard();
+		{k++;
+			
+			b.letters = m.createTable(5);
 			f.filterLevelOne(d,h,b);
 			f.filterLevelTwo(b);
 			f.filterLevelThree(b);
+			
 		}
-		while(b.boardDictionary.length<50 );
+		while(b.boardDictionary.length<400 );
 		
 		this.log = log;
 	}

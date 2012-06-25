@@ -47,7 +47,7 @@ public class Board{
          c='n';}
         // to here
 				 */
-				c = 'a';
+				//c = 'a';
 				letters[i][j] = c;
 				points[i][j] = pointsOf(c);  
 			}

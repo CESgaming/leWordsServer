@@ -12,12 +12,14 @@ public class Server {
 
 		ServerThread last = null;
 
-		log.updateLog(10, "Dictionary is setup with .length>=50", false);
+		
 		
 		// b.boardDictionary.printDictionary();
 		// b.printBoard();
+		 
 		GameManager gM = new GameManager(log);
 		gM.start();
+		log.updateLog(10, "Dictionary is setup with .length>=50", false);
 
 		ServerSocket serverSocket = null;
 		int port = 5222; // actually works
@@ -31,8 +33,9 @@ public class Server {
 			System.exit(1);
 		}
 		
-		boolean listening = true;
+		boolean listening = true; 
 
+		
 		while(listening)
 		{
 
@@ -43,5 +46,6 @@ public class Server {
 
 		}
 		serverSocket.close();
+		
 	}
 }
