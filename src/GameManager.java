@@ -66,12 +66,7 @@ public class GameManager  extends Thread {
 		startTime = System.currentTimeMillis();
 		while(running)
 		{
-			/*try {
-				Thread.sleep(200);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
+			
 			switch(GAMESTATE)
 			{
 			case 0:
@@ -124,7 +119,6 @@ public class GameManager  extends Thread {
 	        		if(!clients.elementAt(i).remove.contains(deadClient))
 	        		clients.elementAt(i).remove.add(deadClient);
 	        		clients.elementAt(i).time = curTime;
-	        		//clients.elementAt(i).players = numberOfClients;
 	        		}
 	        		
 	        	}
@@ -135,7 +129,8 @@ public class GameManager  extends Thread {
 			del.clear();
 			
 			//Check if time is over
-			if(curTime>120000)
+			//After 120 seconds, the client turns off though
+			if(curTime>140000)
 				GAMESTATE = 1;
 			break;
 			}

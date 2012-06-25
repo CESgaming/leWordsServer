@@ -32,6 +32,7 @@ public class ServerThread extends Thread {
     public void run() {
 
 	try {
+		
 	    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 	    BufferedReader in = new BufferedReader(
 				    new InputStreamReader(
@@ -70,6 +71,13 @@ public class ServerThread extends Thread {
 	    boolean listening = true;
 	    while (listening) 
 	    {
+	    	try{
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 	    	outStream.writeInt(GAMESTATE);
 	    	switch(GAMESTATE)
 	    	{
