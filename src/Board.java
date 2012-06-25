@@ -52,6 +52,7 @@ public class Board{
 				points[i][j] = pointsOf(c);  
 			}
 		}
+		
 		letters[0][0] = 'a';
 		letters[0][1] = 'a';
 		letters[0][2] = 'c';

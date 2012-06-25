@@ -12,10 +12,49 @@ public class GameManager  extends Thread {
 	public ServerThread lastClient=null;
 	public ServerThread deadClient=null;
 	public Log log;
+	long startTime=0;
+	long curTime =0;
+	int GAMESTATE=0;
+	Board b;
+	Hypercube h;
+	Dictionary d;
+	Filter f;
+	int dim = 5;
+	
 	public Random rnd = new Random();
 	public GameManager(Log log)
 	{
+		
+		b = new Board(dim);
+		h = new Hypercube();
+		d = new Dictionary();
+		f = new Filter();
+		h.fillHypercube();
+		d.fillCompleteDictionary();
+		
+		do
+		{
+			b.fillBoard();
+			f.filterLevelOne(d,h,b);
+			f.filterLevelTwo(b);
+			f.filterLevelThree(b);
+		}
+		while(b.boardDictionary.length<50 );
+		
 		this.log = log;
+	}
+	
+	public void setUpNewBoard()
+	{
+		do
+		{
+			
+			b.fillBoard();
+			f.filterLevelOne(d,h,b);
+			f.filterLevelTwo(b);
+			f.filterLevelThree(b);		
+		}
+		while(b.boardDictionary.length<50 );
 	}
 	
 
@@ -23,16 +62,53 @@ public class GameManager  extends Thread {
 	{
 		boolean running = true;
 		int numberOfClients=0;
+		GAMESTATE = 2;
+		startTime = System.currentTimeMillis();
 		while(running)
 		{
+			/*try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			switch(GAMESTATE)
+			{
+			case 0:
+				break;
+			case 1:
+				setUpNewBoard();
+				for(int i =0; i < clients.size(); i++)
+				{
+					if(clients.elementAt(i).GAMESTATE!=1)
+					{
+						clients.elementAt(i).boardSend= false;
+					clients.elementAt(i).b = b;
+					clients.elementAt(i).GAMESTATE = 1;
+					clients.elementAt(i).score =0;
+					}
+				}
+				boolean ready = false;
+				while(ready)
+				{
+				ready = true;
+				for(int i =0; i < clients.size(); i++)
+					if(!clients.elementAt(i).boardSend)
+						ready=false;
+					
+						else if(clients.elementAt(i).GAMESTATE==1)
+							clients.elementAt(i).GAMESTATE = 2;
+				}
+				startTime = System.currentTimeMillis();
+				GAMESTATE = 2;
+				break;
+				
+			
+			case 2:
+				curTime = (System.currentTimeMillis() - startTime);
 			//Update the player count on all clients:
 			numberOfClients = clients.size();
 			//Now iterate through all clients and update their information
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 				
 			if(clients.size()>0)
 	        	for(int i =0; i < numberOfClients; i++)
@@ -45,7 +121,9 @@ public class GameManager  extends Thread {
 	        			}
 	        		else
 	        		{
+	        		if(!clients.elementAt(i).remove.contains(deadClient))
 	        		clients.elementAt(i).remove.add(deadClient);
+	        		clients.elementAt(i).time = curTime;
 	        		//clients.elementAt(i).players = numberOfClients;
 	        		}
 	        		
@@ -55,6 +133,12 @@ public class GameManager  extends Thread {
 				clients.remove(del.elementAt(i));
 			}
 			del.clear();
+			
+			//Check if time is over
+			if(curTime>120000)
+				GAMESTATE = 1;
+			break;
+			}
 			
 		}
 		

@@ -14,8 +14,11 @@ public class ServerThread extends Thread {
 	public String word;
 	public Board b;
 	public Log log;
+	boolean boardSend = false;
+	public int GAMESTATE =2;
 	public boolean disconnected = false;
 	public int players;
+	public float time;
 	public Vector<String> names = new Vector<String>();
 	public Vector<ServerThread> clients = new Vector<ServerThread>();
 	public Vector<ServerThread> remove = new Vector<ServerThread>();
@@ -45,7 +48,7 @@ public class ServerThread extends Thread {
 	    	tempName+=inStream.readChar();
 	    name = tempName;
 	    
-	    //First of all, send Board Information:
+	   /* //First of all, send Board Information:
 	    outStream.writeInt(5);
 	    for(int i =0; i < b.dim; i++)
 	    	for(int j =0; j < b.dim; j++)
@@ -62,10 +65,46 @@ public class ServerThread extends Thread {
 	    		outStream.writeChar(word.charAt(j));
 	    		
 	    }
-	    
+	    */
+	    GAMESTATE = 1;
 	    boolean listening = true;
 	    while (listening) 
 	    {
+	    	outStream.writeInt(GAMESTATE);
+	    	switch(GAMESTATE)
+	    	{
+	    	case 0:
+	    		break;
+	    	case 1:
+	    		if(!boardSend)
+	    		{
+	    		
+	    		//First of all, send Board Information:
+	    	    outStream.writeInt(5);
+	    	    for(int i =0; i < b.dim; i++)
+	    	    	for(int j =0; j < b.dim; j++)
+	    	    		outStream.writeChar(b.letters[i][j]);
+	    	    
+	    	    //Send board dictionary
+	    	    int dictSizeNew = b.boardDictionary.length;
+	    	    outStream.writeInt(dictSizeNew);
+	    	    for(int i =0; i < dictSizeNew; i++)
+	    	    {
+	    	    	word = b.boardDictionary.dictionary[i];
+	    	    	outStream.writeInt(word.length());
+	    	    	for(int j =0; j <word.length(); j++)
+	    	    		outStream.writeChar(word.charAt(j));
+	    	    		
+	    	    }
+	    	    boardSend = true;
+	    	    GAMESTATE = 2;
+	    		}
+	    	    
+	    		break;
+	    	case 2:
+
+	    		//Write Time
+	    	outStream.writeInt((int)(time)/1000);
 	    	//Reading and writing meta data to every client
 		    //System.out.println("listening");
 	    	//Get points of client
@@ -92,6 +131,9 @@ public class ServerThread extends Thread {
 		    	}
 
 		    }
+		    break;
+		    
+	    	}
 	    }
 	    out.close();
 	    in.close();
