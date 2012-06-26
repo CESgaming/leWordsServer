@@ -20,6 +20,7 @@ public class GameManager  extends Thread {
 	Dictionary d;
 	Filter f;
 	int dim = 5;
+	Markov m ;
 	
 	public Random rnd = new Random();
 	public GameManager(Log log)
@@ -29,10 +30,11 @@ public class GameManager  extends Thread {
 		h = new Hypercube();
 		d = new Dictionary();
 		f = new Filter();
+		m= new Markov();
 		h.fillHypercube();
 		d.fillCompleteDictionary();
 	
-		Markov m = new Markov();
+
 		m.createProbabilityTable();
 	
 
