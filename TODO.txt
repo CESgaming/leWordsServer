@@ -1,0 +1,24 @@
+
+BUGS FIXES TODOS
+löschen wenn weg
+bug : das auswählen kann buggen wenn man die wörter auf eine bestimmte weise
+      markiert und wieder zurück geht, du ( zeig ich dir was ich meine)
+
+fix : markov chain achtung bei zeilenumsprung,'e'nerfen , mein teil
+fix:  neues board erstellen während das scoreboard dargestellt wird, sonst
+        kann es kommen dass er danach ein  paar sekunden brauch um ein board zu finden
+        und als spieler sieht man solange nur "x" auf dem boarddenke das machst du
+        besser
+fix: wenn man den server startet geht der ram um 250 mb hoch , liegt am
+        dictionary, eventuell mach ich das so dass nie das ganze eingelesen wird
+        sondern immer nur die richtigen zeilen, also das mache ich
+fix : das ausfaden MUSS beendet werden wenn man anfängt nen neues wort zu
+        machen, sonst sieht man noch rot auf dem board wenn manschon was neues hat,
+        auch der fader sollte schneller , du
+todo: zeit farblich je nach wie lange , du?
+todo: darstellung x wörter von y gefunden , n punkte von M, egal wer
+todo: punnkte auf board, punkte berechnung für wörter ändern, ich
+todo: git repo aufräumen ,iwiei ist das dict auch im client (ich)
+todo: namen , ip einlesen , du ?
+todo: mehr log einträge damit ich beim server dann hinterher nen besseren
+        überblick habe , ich
