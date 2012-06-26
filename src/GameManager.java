@@ -41,28 +41,33 @@ public class GameManager  extends Thread {
 		do
 		{k++;
 			
-			b.letters = m.createTable(5);
+			b.letters = m.createTable(dim);
 			f.filterLevelOne(d,h,b);
 			f.filterLevelTwo(b);
 			f.filterLevelThree(b);
 			
 		}
 		while(b.boardDictionary.length<400 );
+		b.boardDictionary.printDictionary();
 		
 		this.log = log;
 	}
 	
 	public void setUpNewBoard()
 	{
+		int k= 0;
 		do
-		{
+		{k++;
 			
-			b.fillBoard();
+			b.letters = m.createTable(dim);
 			f.filterLevelOne(d,h,b);
 			f.filterLevelTwo(b);
-			f.filterLevelThree(b);		
+			f.filterLevelThree(b);
+			
 		}
-		while(b.boardDictionary.length<50 );
+		while(b.boardDictionary.length<400 );
+		b.boardDictionary.printDictionary();
+		
 	}
 	
 
