@@ -26,7 +26,7 @@ public class Server {
 		 
 		GameManager gM = new GameManager(log);
 		gM.start();
-		log.updateLog(10, "Dictionary is setup with .length>=50", false);
+		log.updateLog(10, "Dictionary is setup with .length>=400", false);
 
 		ServerSocket serverSocket = null;
 		int port = 5222; // actually works

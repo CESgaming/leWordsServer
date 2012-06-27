@@ -45,34 +45,55 @@ public class Markov {
 		int given = (int)h -97;
 
 		for (int i=0;i<dim;i++){
-			for (int j=0;j<dim;j++){
-				double p = r.nextDouble(); // between 0,1
-				int follows=0;
-				if (p<probSummed[given][0]){
-					follows = 0;
 
-				}else{
-					for (int k=0;k<25;k++){
-						if (probSummed[given][k]< p && p< probSummed[given][k+1]){
-							follows = k+1;
-							k = 999;
+			// ------>
+			// <------
+			// ------>
+			// <------
+			if (i%2==0){
+				for (int j=dim-1;j>=0;j--){
+					double p = r.nextDouble(); // between 0,1
+					int follows=0;
+					if (p<probSummed[given][0]){
+						follows = 0;
+
+					}else{
+						for (int k=0;k<25;k++){
+							if (probSummed[given][k]< p && p< probSummed[given][k+1]){
+								follows = k+1;
+								k = 999;
+							}
 						}
 					}
+
+					c[i][j]= (char)(follows+97);
+					given = follows;
 				}
 
-				c[i][j]= (char)(follows+97);
-				given = follows;
+			}else{
+				for (int j=0;j<dim;j++){
+					double p = r.nextDouble(); // between 0,1
+					int follows=0;
+					if (p<probSummed[given][0]){
+						follows = 0;
+
+					}else{
+						for (int k=0;k<25;k++){
+							if (probSummed[given][k]< p && p< probSummed[given][k+1]){
+								follows = k+1;
+								k = 999;
+							}
+						}
+					}
+
+					c[i][j]= (char)(follows+97);
+					given = follows;
+				}
 			}
 		}
 
 
 
-		for (int i=0;i<dim;i++){
-			for (int j=0;j<dim;j++){
-				System.out.print(c[i][j] + " ");
-			}
-			System.out.println();
-		}
 
 
 
@@ -149,8 +170,8 @@ public class Markov {
 		}
 
 	}
-	
-	
+
+
 
 }
 

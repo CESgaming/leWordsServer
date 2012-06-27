@@ -4,7 +4,7 @@ löschen wenn weg
 bug : das auswählen kann buggen wenn man die wörter auf eine bestimmte weise
       markiert und wieder zurück geht, du ( zeig ich dir was ich meine)
 
-fix : markov chain achtung bei zeilenumsprung,'e'nerfen , mein teil
+fix : markov chain achtung bei done,'e'nerfen , mein teil
 fix:  neues board erstellen während das scoreboard dargestellt wird, sonst
         kann es kommen dass er danach ein  paar sekunden brauch um ein board zu finden
         und als spieler sieht man solange nur "x" auf dem boarddenke das machst du
