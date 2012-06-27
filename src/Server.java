@@ -3,13 +3,20 @@ import java.net.*;
 import java.util.Vector;
 import java.io.*;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 
 public class Server {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException {
 
 		Log log= new Log("log.txt");
-
+		JFrame jframe = new JFrame("Server");
+		jframe.setSize(200,100);
+		jframe.setVisible(true);
+		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ServerThread last = null;
 
 		
