@@ -88,6 +88,7 @@ public class GameManager  extends Thread {
 		{
 			if (!boardFound){
 				setUpNewBoard();
+				log.updateLog(42, "New Board has beend found. It has "+ b.boardDictionary.length+" words.", false);
 				boardFound = true;
 			}
 			try {
@@ -134,7 +135,7 @@ public class GameManager  extends Thread {
 			
 				
 				if (!startMessageshowed){
-				System.out.println("New round starts.");
+					log.updateLog(40, "New Round has started.", false);
 				startMessageshowed = true;
 				}
 				
@@ -169,10 +170,11 @@ public class GameManager  extends Thread {
 				//Check if time is over
 				//After 120 seconds, the client turns off though
 				if(curTime>120000 && !endMessageshowed){
-					System.out.println("Round is over");
+					log.updateLog(41, "Round is over", false);
+					
 					endMessageshowed= true;
 				}
-				if(curTime>130000  && !notified){
+				if(curTime>120000  && !notified){
 					notified = true;
 					boardFound=false;
 				}
@@ -204,6 +206,7 @@ public class GameManager  extends Thread {
 		//Adding yourself to yourself...WE HAVE TO GO DEEPER!
 		client.clients.add(client);
 		clients.add(client);
+		log.updateLog(21, "Player << "+ client.name+ " >> , UserID = "+ client.ID+ " connected.", false);
 
 	}
 

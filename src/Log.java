@@ -4,15 +4,16 @@ public class Log {
 
 
 	String path;
-	Date d;
+	GregorianCalendar d;
 	FileOutputStream fstream;
 	DataOutputStream fout;
 	BufferedWriter bw ;
 
 	public  Log(String p){
-		d= new Date();
+		d= new GregorianCalendar();
 		@SuppressWarnings("deprecation")
-		String date = d.getDate()+ " at " + d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+		Date ee = d.getTime();
+		String date =  + ee.getHours()+":"+ee.getMinutes()+":"+ee.getSeconds();
 		
 		
 	
@@ -39,9 +40,10 @@ public class Log {
 
 	public void updateLog(int type,String body,boolean display){
 		if (display) System.out.println(body);
-		
+		d= new GregorianCalendar();
 		@SuppressWarnings("deprecation")
-		String date =  + d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+		Date e = d.getTime();
+		String date =  + e.getHours()+":"+e.getMinutes()+":"+e.getSeconds();
 		String prefix="";
 		
 		switch(type){
@@ -75,7 +77,16 @@ public class Log {
 			prefix ="\t Id 30: Server|Port:\t";
 		
 			break;
-
+			
+		case 40://
+			prefix ="\t Id 40: Game|Start:\t";
+			break;
+		case 41://
+			prefix ="\t Id 41: Game|End:\t";
+			break;
+		case 42://
+			prefix ="\t Id 42: Game|NewBoard:\t";
+			break;
 		default:
 			prefix ="\t Id default:\t";
 			break;
