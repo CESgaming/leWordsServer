@@ -149,7 +149,7 @@ public class ServerThread extends Thread {
 
 	} catch (IOException e) {
 	    disconnected = true;
-	    log.updateLog(21, "Player "+name+" disconnected", true);
+	    log.updateLog(22, "Player disconnected", true);
 	   // e.printStackTrace();
 	}
     }

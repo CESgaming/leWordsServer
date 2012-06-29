@@ -43,6 +43,9 @@ public class Log {
 		d= new GregorianCalendar();
 		@SuppressWarnings("deprecation")
 		Date e = d.getTime();
+
+		
+		
 		String date =  + e.getHours()+":"+e.getMinutes()+":"+e.getSeconds();
 		String prefix="";
 		
