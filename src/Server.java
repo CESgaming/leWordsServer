@@ -42,6 +42,19 @@ public class Server {
 		
 		boolean listening = true; 
 
+		//gM.m.printProbabilityTable();
+		float tmp=0;
+		for (int i=0;i<26;i++){
+			tmp += gM.m.prob[i][0];
+		}
+		System.out.println("a: "+tmp);
+		 tmp=0;
+		for (int i=0;i<26;i++){
+			tmp += gM.m.prob[i][4];
+		}
+		System.out.println("e: "+tmp);
+		
+		
 		
 		while(listening)
 		{

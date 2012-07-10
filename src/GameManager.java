@@ -36,6 +36,7 @@ public class GameManager  extends Thread {
 
 
 		m.createProbabilityTable();
+	//	m.createProbabilityCube();
 
 
 
@@ -44,6 +45,7 @@ public class GameManager  extends Thread {
 		{k++;
 
 		b.letters = m.createTable(dim);
+	//	b.letters = m.createTableMarkov3(dim);
 		f.filterLevelOne(d,h,b);
 		f.filterLevelTwo(b);
 		f.filterLevelThree(b);
@@ -62,6 +64,7 @@ public class GameManager  extends Thread {
 		{k++;
 
 		b.letters = m.createTable(dim);
+	//	b.letters = m.createTableMarkov3(dim);
 		f.filterLevelOne(d,h,b);
 		f.filterLevelTwo(b);
 		f.filterLevelThree(b);
@@ -69,7 +72,13 @@ public class GameManager  extends Thread {
 		}
 		while(b.boardDictionary.length<400 );
 		System.out.println("setUpNewBoard() has found a board!");
-		//b.boardDictionary.printDictionary();
+		b.boardDictionary.printDictionary();
+		System.out.println(b.boardDictionary.length);
+		int temp=0;
+		for (int i=0;i<b.boardDictionary.length;i++){
+			temp += b.calcWordPoints( b.boardDictionary.dictionary[i]);
+		}
+		System.out.println(temp);
 
 	}
 
